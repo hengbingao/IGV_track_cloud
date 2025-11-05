@@ -22,7 +22,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 3. Add to environment:
 
     ```bash
-    echo "export PATH=\$PATH:$(pwd)/bin" >> ~/.bashrc
+    echo "export PATH=$PATH:$(pwd)/bin" >> ~/.bashrc
     source ~/.bashrc
     ```
 
@@ -45,10 +45,6 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 - `-g, --genome`: Reference genome (`hg38` or `mm10`, default: `hg38`)  
 
 3. Example:
-
-    ```bash
-    IGV_cloud_tracks -i cloud_tracks.txt
-    ```
 
     ```bash
     IGV_cloud_tracks -i mm10_tracks.txt -o mm10_session.xml -g mm10
