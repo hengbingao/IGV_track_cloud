@@ -1,7 +1,7 @@
 # IGV_cloud_tracks
 Generate IGV session XML files from cloud-hosted bigWig files with support for multiple genomes (hg38, mm10)
 
-![IGV session example](https://github.com/yourusername/IGV_cloud_tracks/blob/main/png/IGV_session.png)
+![IGV session example](https://github.com/hengbingao/IGV_track_cloud/blob/main/png/IGV_cloud_tracks.png)
 
 ## **Install**
 
