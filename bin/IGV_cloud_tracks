@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Get absolute path to src directory
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../src" && pwd)"
+
+show_help() {
+    echo "IGV_cloud_tracks - Generate IGV session XML file from cloud bigWig URLs"
+    echo
+    echo "Usage:"
+    echo "  IGV_cloud_tracks -i <input_file> [-o <output_file>] [-g <genome>]"
+    echo
+    echo "Options:"
+    echo "  -i, --input     Input file containing one bigWig URL per line (required)"
+    echo "  -o, --output    Output IGV session XML file (default: igv_session.xml)"
+    echo "  -g, --genome    Reference genome, e.g., hg38 or mm10 (default: hg38)"
+    echo "  -h, --help      Show this help message"
+    echo
+    echo "Example:"
+    echo "  IGV_cloud_tracks -i cloud_tracks.txt -o my_session.xml -g mm10"
+}
+
+# Show help if requested
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+# Execute the Python script with all arguments
+python3 "$script_dir/generate_igv_session.py" "$@"
