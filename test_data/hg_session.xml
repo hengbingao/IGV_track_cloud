@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Session genome="hg38" hasGeneTrack="true" hasSequenceTrack="true" locus="All" version="8">
+    <Resources>
+        <Resource path="https://www.dropbox.com/scl/fi/zy1hzmh1sfz72tl03no1h/RL5776_MD3_TNT_p35_EMseq_S7_CG_bin200.CGN-both.frac.bw?rlkey=u3dq1oilqqdu9j6al4v2sypwz&amp;st=kjy71jxk&amp;dl=1" />
+        <Resource path="https://www.dropbox.com/scl/fi/q5q4z7gedcrfylywiex3l/RL5778_MD3_iPSC_p35_EMseq_S9_CG_bin200.CGN-both.frac.bw?rlkey=djn4t9lvu0y7spdoyo3lgonki&amp;st=7elb1zb1&amp;dl=1" />
+        <Resource path="https://www.dropbox.com/scl/fi/pbke8k9u1eonwbv6cfzrs/RL5779_MD4_TNT_p35_EMseq_S10_CG_bin200.CGN-both.frac.bw?rlkey=2f1jegb551lcz0g0o9qhw640o&amp;st=chclyxcy&amp;dl=1" />
+        <Resource path="https://www.dropbox.com/scl/fi/za73o8w3v6t3mqzlfzp4w/RL5777_MD3_BPSC_p35_EMseq_S8_CG_bin200.CGN-both.frac.bw?rlkey=y1bf8bl6tmjgconflq2qyxz1p&amp;st=mb9ejfxh&amp;dl=1" />
+        </Resources>
+    <Panel height="534" name="DataPanel" width="1778">
+        <Track autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="10" id="https://www.dropbox.com/scl/fi/zy1hzmh1sfz72tl03no1h/RL5776_MD3_TNT_p35_EMseq_S7_CG_bin200.CGN-both.frac.bw?rlkey=u3dq1oilqqdu9j6al4v2sypwz&amp;st=kjy71jxk&amp;dl=1" name="RL5776_MD3_TNT_p35_EMseq_S7_CG_bin200.CGN-both.frac.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="0.0" type="LINEAR" />
+            </Track>
+        <Track autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="10" id="https://www.dropbox.com/scl/fi/q5q4z7gedcrfylywiex3l/RL5778_MD3_iPSC_p35_EMseq_S9_CG_bin200.CGN-both.frac.bw?rlkey=djn4t9lvu0y7spdoyo3lgonki&amp;st=7elb1zb1&amp;dl=1" name="RL5778_MD3_iPSC_p35_EMseq_S9_CG_bin200.CGN-both.frac.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="0.0" type="LINEAR" />
+            </Track>
+        <Track autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="10" id="https://www.dropbox.com/scl/fi/pbke8k9u1eonwbv6cfzrs/RL5779_MD4_TNT_p35_EMseq_S10_CG_bin200.CGN-both.frac.bw?rlkey=2f1jegb551lcz0g0o9qhw640o&amp;st=chclyxcy&amp;dl=1" name="RL5779_MD4_TNT_p35_EMseq_S10_CG_bin200.CGN-both.frac.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="0.0" type="LINEAR" />
+            </Track>
+        <Track autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="10" id="https://www.dropbox.com/scl/fi/za73o8w3v6t3mqzlfzp4w/RL5777_MD3_BPSC_p35_EMseq_S8_CG_bin200.CGN-both.frac.bw?rlkey=y1bf8bl6tmjgconflq2qyxz1p&amp;st=mb9ejfxh&amp;dl=1" name="RL5777_MD3_BPSC_p35_EMseq_S8_CG_bin200.CGN-both.frac.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="0.0" type="LINEAR" />
+            </Track>
+        </Panel>
+    <Panel height="302" name="FeaturePanel" width="1778">
+        <Track clazz="org.broad.igv.track.SequenceTrack" fontSize="10" id="Reference sequence" name="Reference sequence" visible="true" />
+        <Track clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;845.0;255,255,255;0,0,178" fontSize="10" height="35" id="hg38_genes" name="Gene" visible="true" />
+        </Panel>
+    <PanelLayout dividerFractions="0.6358244365361803" />
+    <HiddenAttributes>
+        <Attribute name="DATA FILE" />
+        <Attribute name="DATA TYPE" />
+        <Attribute name="NAME" />
+        </HiddenAttributes>
+    </Session>
