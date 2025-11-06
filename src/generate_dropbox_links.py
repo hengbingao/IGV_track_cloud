@@ -5,7 +5,7 @@
 Batch generate Dropbox direct download links for all files in a folder.
 
 Usage example:
-    python generate_dropbox_links.py \
+    cloudigv -dropbox_URL \
         -k YOUR_ACCESS_TOKEN \
         -f /CUTnTag/hs/ \
         -o hs_links.txt
@@ -47,6 +47,7 @@ def create_shared_link(dbx, path):
 
 def main():
     parser = argparse.ArgumentParser(
+        prog="cloudigv -dropbox_URL",
         description="Batch generate Dropbox direct download links for all files in a folder."
     )
     parser.add_argument("-k", "--key", required=True, help="Dropbox API access token")
