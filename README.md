@@ -64,7 +64,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
     ```
 
-**Example:**
+   **Example:**
 
     ```bash
     IGV_cloud_tracks -dropbox_URL -k sl.ABCDEF123456 -f /CUTnTag/hs/ -o hs_links.txt
@@ -76,13 +76,13 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     IGV_cloud_tracks -igv_session_xml -i <INPUT_FILE> [-o <OUTPUT_FILE>] [-g <GENOME>]
     ```
 
-**Example 1: Using Dropbox-generated links**
+    **Example 1: Using Dropbox-generated links**
 
     ```bash
     IGV_cloud_tracks -igv_session_xml -i hs_links.txt -o hs_session.xml -g hg38
     ```
 
-**Example 2: Using custom track names**
+    **Example 2: Using custom track names**
 
     ```bash
     IGV_cloud_tracks -igv_session_xml -i my_tracks.txt -o my_session.xml -g mm10
