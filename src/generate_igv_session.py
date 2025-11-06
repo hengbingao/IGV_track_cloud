@@ -8,6 +8,12 @@ Automatically generate an IGV session XML file
     1) One-column (just URL)
     2) Two-column (track_name and URL, separated by tab or space)
 - Track name = first column if provided, else filename from URL
+
+Usage example:
+    cloudigv -igv_session_xml \
+        -i hs_links.txt \
+        -o igv_session.xml \
+        -g hg38
 """
 
 import argparse
@@ -15,12 +21,12 @@ import xml.etree.ElementTree as ET
 
 def indent(elem, level=0):
     """Recursively indent XML for pretty printing"""
-    i = "\n" + level*"    "
+    i = "\n" + level * "    "
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "    "
         for e in elem:
-            indent(e, level+1)
+            indent(e, level + 1)
         if not elem.tail or not elem.tail.strip():
             elem.tail = i
     else:
@@ -28,7 +34,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 def generate_igv_session(input_file, output_file, genome="hg38"):
-    # Root session element
+    """Generate an IGV session XML file"""
     session = ET.Element("Session", {
         "genome": genome,
         "hasGeneTrack": "true",
@@ -37,7 +43,6 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
         "version": "8"
     })
 
-    # Resources & Panels
     resources = ET.SubElement(session, "Resources")
 
     data_panel = ET.SubElement(session, "Panel", {
@@ -127,12 +132,10 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
             "type": "LINEAR"
         })
 
-    # --- Layout & hidden attributes ---
     ET.SubElement(session, "PanelLayout", {"dividerFractions": "0.6358244365361803"})
     hidden = ET.SubElement(session, "HiddenAttributes")
-    ET.SubElement(hidden, "Attribute", {"name": "DATA FILE"})
-    ET.SubElement(hidden, "Attribute", {"name": "DATA TYPE"})
-    ET.SubElement(hidden, "Attribute", {"name": "NAME"})
+    for attr in ["DATA FILE", "DATA TYPE", "NAME"]:
+        ET.SubElement(hidden, "Attribute", {"name": attr})
 
     indent(session)
     tree = ET.ElementTree(session)
@@ -141,10 +144,16 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
     print(f"Included {len(track_entries)} tracks.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate IGV session XML file")
-    parser.add_argument("-i", "--input", required=True, help="Input file: either one URL per line or two columns (track_name URL)")
-    parser.add_argument("-o", "--output", default="igv_session.xml", help="Output XML file name")
-    parser.add_argument("-g", "--genome", default="hg38", help="Genome assembly (e.g. hg38, mm10)")
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        prog="cloudigv -igv_session_xml",
+        description="Generate an IGV session XML file from URL list."
+    )
+    parser.add_argument("-i", "--input", required=True,
+                        help="Input file: one URL per line or two columns (track_name URL)")
+    parser.add_argument("-o", "--output", default="igv_session.xml",
+                        help="Output XML file name")
+    parser.add_argument("-g", "--genome", default="hg38",
+                        help="Genome assembly (e.g. hg38, mm10)")
 
+    args = parser.parse_args()
     generate_igv_session(args.input, args.output, genome=args.genome)
