@@ -55,7 +55,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 **Important notes for Dropbox usage:**
 
 - You must have a Dropbox API access token. Generate one at: [Dropbox Developers Apps](https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y)  
-- Ensure your app permission is set to **sharing.write**  
+- Ensure your app permission is set to **sharing.write** , the you can get the from **Generated access token** which under **setting**
 - The output file will contain **two columns**: `filename <TAB> direct_download_URL`  
 
 3. **Generate Dropbox URLs (`-dropbox_URL`)**
