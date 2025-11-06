@@ -38,13 +38,13 @@ show_help() {
     echo "  cloudigv -igv_session_xml -i hs_links.txt -o igv_session.xml -g hg38"
     echo
     echo "Note:"
-    echo "  • To use the Dropbox URL generator, install the dropbox SDK:"
+    echo "  To use the Dropbox URL generator, install the dropbox SDK:"
     echo "        pip install dropbox"
     echo
-    echo "  • Create an app and access token at:"
+    echo "  Create an app and access token at:"
     echo "        https://www.dropbox.com/developers/apps"
     echo
-    echo "  • Make sure your app has the 'sharing.write' permission enabled!"
+    echo "  Make sure your app has the 'sharing.write' permission enabled!"
     echo
 }
 
@@ -58,18 +58,26 @@ fi
 subcommand="$1"
 shift
 
+# If the remaining args contain -h or --help, show cloudigv help (do not forward -h to subcommand)
+for a in "$@"; do
+    if [[ "$a" == "-h" || "$a" == "--help" ]]; then
+        show_help
+        exit 0
+    fi
+done
+
 case "$subcommand" in
     -dropbox_URL)
-        echo "🚀 Generating Dropbox URLs..."
-        echo "   Short options available: -k <key>  -f <folder>  -o <output_file>"
+        echo "Generating Dropbox URLs..."
+        echo "Short options available: -k <key>  -f <folder>  -o <output_file>"
         python3 "$script_dir/generate_dropbox_links.py" "$@"
         ;;
     -igv_session_xml)
-        echo "🧬 Generating IGV session XML..."
+        echo "Generating IGV session XML..."
         python3 "$script_dir/generate_igv_session.py" "$@"
         ;;
     *)
-        echo "❌ Unknown subcommand: $subcommand"
+        echo "Unknown subcommand: $subcommand"
         echo
         show_help
         exit 1
