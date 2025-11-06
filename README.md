@@ -1,4 +1,4 @@
-# IGV_cloud_tracks
+# cloudigv
 
 Generate IGV session XML files from cloud-hosted bigWig files with support for multiple genomes (hg38, mm10)
 
@@ -38,7 +38,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 1. Show help:
 
     ```bash
-    IGV_cloud_tracks --help/-h
+    cloudigv --help/-h
     ```
 
 2. **Quick Parameter Reference Table**
@@ -61,31 +61,31 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 3. **Generate Dropbox URLs (`-dropbox_URL`)**
 
     ```bash
-    IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
+    cloudigv -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
     ```
 
    **Example:**
 
     ```bash
-    IGV_cloud_tracks -dropbox_URL -k sl.ABCDEF123456 -f /CUTnTag/hs/ -o hs_links.txt
+    cloudigv -dropbox_URL -k sl.ABCDEF123456 -f /CUTnTag/hs/ -o hs_links.txt
     ```
 
 4. **Generate an IGV session XML file (`-igv_session_xml`)**
 
     ```bash
-    IGV_cloud_tracks -igv_session_xml -i <INPUT_FILE> [-o <OUTPUT_FILE>] [-g <GENOME>]
+    cloudigv -igv_session_xml -i <INPUT_FILE> [-o <OUTPUT_FILE>] [-g <GENOME>]
     ```
 
     **Example 1: Using Dropbox-generated links**
 
     ```bash
-    IGV_cloud_tracks -igv_session_xml -i hs_links.txt -o hs_session.xml -g hg38
+    cloudigv -igv_session_xml -i hs_links.txt -o hs_session.xml -g hg38
     ```
 
     **Example 2: Using custom track names**
 
     ```bash
-    IGV_cloud_tracks -igv_session_xml -i my_tracks.txt -o my_session.xml -g mm10
+    cloudigv -igv_session_xml -i my_tracks.txt -o my_session.xml -g mm10
     ```
 
 **Notes:**
@@ -98,8 +98,8 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 
     ```bash
     # Step 1: Generate Dropbox URLs for a folder
-    IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f /CUTnTag/hs/ -o hs_links.txt
+    cloudigv -dropbox_URL -k <ACCESS_TOKEN> -f /CUTnTag/hs/ -o hs_links.txt
 
     # Step 2: Generate an IGV session XML using these URLs
-    IGV_cloud_tracks -igv_session_xml -i hs_links.txt -o hs_session.xml -g hg38
+    cloudigv -igv_session_xml -i hs_links.txt -o hs_session.xml -g hg38
     ```
