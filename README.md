@@ -41,15 +41,16 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     IGV_cloud_tracks --help/-h
     ```
 
-2. **Generate Dropbox URLs (`-dropbox_URL`)**
+2. **Quick Parameter Reference Table**
 
-    ```bash
-    IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
-    ```
-
-- `-k, --key`      : Dropbox API access token (required)  
-- `-f, --folder`   : Dropbox folder path (required)  
-- `-o, --output`   : Output file for URLs (default: `dropbox_links.txt`)  
+| Subcommand            | Parameter                  | Shortcut | Description                                                                 |
+|-----------------------|---------------------------|---------|-----------------------------------------------------------------------------|
+| `-dropbox_URL`         | `--key`                    | `-k`    | Dropbox API access token (required)                                         |
+|                       | `--folder`                 | `-f`    | Dropbox folder path (required)                                              |
+|                       | `--output`                 | `-o`    | Output file for URLs (default: `dropbox_links.txt`)                          |
+| `-igv_session_xml`      | `--input`                  | `-i`    | Input file with URLs or two-column `track_name URL`                          |
+|                       | `--output`                 | `-o`    | Output IGV session XML file (default: `igv_session.xml`)                     |
+|                       | `--genome`                 | `-g`    | Reference genome (`hg38` or `mm10`, default: `hg38`)                         |
 
 **Important notes for Dropbox usage:**
 
@@ -57,21 +58,23 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 - Ensure your app permission is set to **sharing.write**  
 - The output file will contain **two columns**: `filename <TAB> direct_download_URL`  
 
+3. **Generate Dropbox URLs (`-dropbox_URL`)**
+
+    ```bash
+    IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
+    ```
+
 **Example:**
 
     ```bash
     IGV_cloud_tracks -dropbox_URL -k sl.ABCDEF123456 -f /CUTnTag/hs/ -o hs_links.txt
     ```
 
-3. **Generate an IGV session XML file (`-igv_session_xml`)**
+4. **Generate an IGV session XML file (`-igv_session_xml`)**
 
     ```bash
     IGV_cloud_tracks -igv_session_xml -i <INPUT_FILE> [-o <OUTPUT_FILE>] [-g <GENOME>]
     ```
-
-- `-i, --input`    : Input file: one URL per line, or two columns (`track_name URL`)  
-- `-o, --output`   : Output IGV session XML file (default: `igv_session.xml`)  
-- `-g, --genome`   : Reference genome (`hg38` or `mm10`, default: `hg38`)  
 
 **Example 1: Using Dropbox-generated links**
 
@@ -91,7 +94,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 - Dropbox links are converted to direct download links (`?dl=1`)  
 - Supports multiple genomes via the `-g` option  
 
-4. **Full workflow example**
+5. **Full workflow example**
 
     ```bash
     # Step 1: Generate Dropbox URLs for a folder
