@@ -48,32 +48,23 @@ show_help() {
     echo
 }
 
-# Show help if requested or no arguments
+# If no args or top-level -h/--help, show global help
 if [[ $# -eq 0 || "$1" == "-h" || "$1" == "--help" ]]; then
     show_help
     exit 0
 fi
 
-# Parse subcommand
+# Parse subcommand (first arg)
 subcommand="$1"
 shift
 
-# If the remaining args contain -h or --help, show cloudigv help (do not forward -h to subcommand)
-for a in "$@"; do
-    if [[ "$a" == "-h" || "$a" == "--help" ]]; then
-        show_help
-        exit 0
-    fi
-done
-
 case "$subcommand" in
     -dropbox_URL)
-        echo "Generating Dropbox URLs..."
-        echo "Short options available: -k <key>  -f <folder>  -o <output_file>"
+        # Forward all remaining args (including -h/--help) to the python subcommand
         python3 "$script_dir/generate_dropbox_links.py" "$@"
         ;;
     -igv_session_xml)
-        echo "Generating IGV session XML..."
+        # Forward all remaining args (including -h/--help) to the python subcommand
         python3 "$script_dir/generate_igv_session.py" "$@"
         ;;
     *)
