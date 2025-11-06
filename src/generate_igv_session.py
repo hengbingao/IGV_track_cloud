@@ -3,10 +3,11 @@
 
 """
 Automatically generate an IGV session XML file
-- Input file: one bigWig URL per line
-- Track name = bigWig filename
-- Supports multiple genomes (hg38, mm10, etc.)
-- Outputs a pretty-printed XML similar to IGV export
+- Input file: one bigWig per line
+  Supports:
+    1) One-column (just URL)
+    2) Two-column (track_name and URL, separated by tab or space)
+- Track name = first column if provided, else filename from URL
 """
 
 import argparse
@@ -32,28 +33,26 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
         "genome": genome,
         "hasGeneTrack": "true",
         "hasSequenceTrack": "true",
-        "locus": "All",  # default locus, could also allow user input
+        "locus": "All",
         "version": "8"
     })
 
-    # Resources
+    # Resources & Panels
     resources = ET.SubElement(session, "Resources")
 
-    # DataPanel
     data_panel = ET.SubElement(session, "Panel", {
         "height": "534",
         "name": "DataPanel",
         "width": "1778"
     })
 
-    # FeaturePanel
     feature_panel = ET.SubElement(session, "Panel", {
         "height": "302",
         "name": "FeaturePanel",
         "width": "1778"
     })
 
-    # Reference and gene tracks
+    # Reference sequence and gene tracks
     ET.SubElement(feature_panel, "Track", {
         "clazz": "org.broad.igv.track.SequenceTrack",
         "fontSize": "10",
@@ -62,7 +61,6 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
         "visible": "true"
     })
 
-    # Gene track differs depending on genome
     if genome.lower() == "hg38":
         gene_id = "hg38_genes"
         gene_name = "Gene"
@@ -74,7 +72,7 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
     else:
         gene_id = f"{genome}_genes"
         gene_name = "Gene"
-        color_scale_max = "845.0"  # default
+        color_scale_max = "845.0"
 
     ET.SubElement(feature_panel, "Track", {
         "clazz": "org.broad.igv.track.FeatureTrack",
@@ -87,25 +85,29 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
         "visible": "true"
     })
 
-    # Read URLs
+    # --- Read input file ---
+    track_entries = []
     with open(input_file, "r") as f:
-        urls = [line.strip() for line in f if line.strip()]
+        for line in f:
+            if not line.strip():
+                continue
+            parts = line.strip().split()
+            if len(parts) == 1:
+                track_name = parts[0].split("/")[-1].split("?")[0]
+                url = parts[0]
+            else:
+                track_name, url = parts[0], parts[1]
 
-    for url in urls:
-        # Convert Dropbox links to dl=1
-        if "dropbox.com" in url:
-            if "?dl=0" in url:
-                url = url.replace("?dl=0", "?dl=1")
-            elif "&dl=0" in url:
-                url = url.replace("&dl=0", "&dl=1")
+            # Ensure Dropbox direct download
+            if "dropbox.com" in url:
+                url = url.replace("?dl=0", "?dl=1").replace("&dl=0", "&dl=1")
 
-        # Add to Resources
+            track_entries.append((track_name, url))
+
+    # --- Add each track ---
+    for track_name, url in track_entries:
         ET.SubElement(resources, "Resource", {"path": url})
 
-        # Track name = bigWig filename
-        track_name = url.split("/")[-1].split("?")[0]
-
-        # Add track to DataPanel
         track = ET.SubElement(data_panel, "Track", {
             "autoScale": "false",
             "clazz": "org.broad.igv.track.DataSourceTrack",
@@ -125,26 +127,24 @@ def generate_igv_session(input_file, output_file, genome="hg38"):
             "type": "LINEAR"
         })
 
-    # PanelLayout and HiddenAttributes
+    # --- Layout & hidden attributes ---
     ET.SubElement(session, "PanelLayout", {"dividerFractions": "0.6358244365361803"})
     hidden = ET.SubElement(session, "HiddenAttributes")
     ET.SubElement(hidden, "Attribute", {"name": "DATA FILE"})
     ET.SubElement(hidden, "Attribute", {"name": "DATA TYPE"})
     ET.SubElement(hidden, "Attribute", {"name": "NAME"})
 
-    # Pretty print
     indent(session)
-
-    # Save XML
     tree = ET.ElementTree(session)
     tree.write(output_file, encoding="UTF-8", xml_declaration=True)
-    print(f"IGV session saved to {output_file}")
+    print(f"? IGV session saved to {output_file}")
+    print(f"Included {len(track_entries)} tracks.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate IGV session XML file")
-    parser.add_argument("-i", "--input", required=True, help="Input file, one bigWig URL per line")
-    parser.add_argument("-o", "--output", default="igv_session.xml", help="Output session XML file")
-    parser.add_argument("-g", "--genome", default="hg38", help="Reference genome (e.g., hg38, mm10)")
+    parser.add_argument("-i", "--input", required=True, help="Input file: either one URL per line or two columns (track_name URL)")
+    parser.add_argument("-o", "--output", default="igv_session.xml", help="Output XML file name")
+    parser.add_argument("-g", "--genome", default="hg38", help="Genome assembly (e.g. hg38, mm10)")
     args = parser.parse_args()
 
     generate_igv_session(args.input, args.output, genome=args.genome)
