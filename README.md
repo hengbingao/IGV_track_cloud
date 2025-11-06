@@ -35,12 +35,12 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     ```
     
 2. access to all files URL:
-
+https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y
     ```bash
     go to here: https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y
     Generated access token 
     ```
-https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y
+
 
 
 3. Generate an IGV session XML file:
