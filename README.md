@@ -9,7 +9,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/hengbingao/IGV_cloud_tracks.git
+    git clone https://github.com/hengbingao/IGV_track_cloud.git
     ```
 
 2. Set executable permissions:
