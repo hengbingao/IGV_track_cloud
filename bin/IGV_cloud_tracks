@@ -33,15 +33,16 @@ shift
 
 case "$subcommand" in
     -dropbox_URL)
-        echo "🚀 Generating Dropbox URLs..."
+        echo "?? Generating Dropbox URLs..."
+        echo "?? Short options: -k <key>  -f <folder>  -o <output_file>"
         python3 "$script_dir/generate_dropbox_links.py" "$@"
         ;;
     -igv_session_xml)
-        echo "🧬 Generating IGV session XML..."
+        echo "?? Generating IGV session XML..."
         python3 "$script_dir/generate_igv_session.py" "$@"
         ;;
     *)
-        echo "❌ Unknown subcommand: $subcommand"
+        echo "? Unknown subcommand: $subcommand"
         echo
         show_help
         exit 1
