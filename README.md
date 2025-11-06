@@ -15,7 +15,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 2. Set executable permissions:
 
     ```bash
-    cd IGV_cloud_tracks
+    cd IGV_track_cloud
     chmod +x ./bin/*
     chmod +x ./src/*
     ```
