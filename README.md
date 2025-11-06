@@ -27,6 +27,12 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     source ~/.bashrc
     ```
 
+4. Install Python dependencies (required for Dropbox functionality):
+
+    ```bash
+    pip install dropbox
+    ```
+
 ## **Usage**
 
 1. Show help:
@@ -35,7 +41,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     IGV_cloud_tracks --help/-h
     ```
 
-2. Generate Dropbox URLs (`-dropbox_URL`):
+2. **Generate Dropbox URLs (`-dropbox_URL`)**
 
     ```bash
     IGV_cloud_tracks -dropbox_URL -k <ACCESS_TOKEN> -f <DROPBOX_FOLDER> [-o <OUTPUT_FILE>]
@@ -45,15 +51,19 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 - `-f, --folder`   : Dropbox folder path (required)  
 - `-o, --output`   : Output file for URLs (default: `dropbox_links.txt`)  
 
+**Important notes for Dropbox usage:**
+
+- You must have a Dropbox API access token. Generate one at: [Dropbox Developers Apps](https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y)  
+- Ensure your app permission is set to **sharing.write**  
+- The output file will contain **two columns**: `filename <TAB> direct_download_URL`  
+
 **Example:**
 
     ```bash
     IGV_cloud_tracks -dropbox_URL -k sl.ABCDEF123456 -f /CUTnTag/hs/ -o hs_links.txt
     ```
 
-- The output file will contain **two columns**: `filename <TAB> direct_download_URL`  
-
-3. Generate an IGV session XML file (`-igv_session_xml`):
+3. **Generate an IGV session XML file (`-igv_session_xml`)**
 
     ```bash
     IGV_cloud_tracks -igv_session_xml -i <INPUT_FILE> [-o <OUTPUT_FILE>] [-g <GENOME>]
@@ -75,11 +85,13 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     IGV_cloud_tracks -igv_session_xml -i my_tracks.txt -o my_session.xml -g mm10
     ```
 
+**Notes:**
+
 - Track names in the IGV session are automatically taken from the first column of the input file (if provided) or from the bigWig filename  
 - Dropbox links are converted to direct download links (`?dl=1`)  
 - Supports multiple genomes via the `-g` option  
 
-4. Workflow example:
+4. **Full workflow example**
 
     ```bash
     # Step 1: Generate Dropbox URLs for a folder
