@@ -33,8 +33,17 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
     ```bash
     IGV_cloud_tracks --help/-h
     ```
+    
+2. access to all files URL:
 
-2. Generate an IGV session XML file:
+    ```bash
+    go to here: https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y
+    Generated access token 
+    ```
+https://www.dropbox.com/developers/apps/info/b2d7u4n267ude1y
+
+
+3. Generate an IGV session XML file:
 
     ```bash
     IGV_cloud_tracks -i cloud_tracks.txt -o my_session.xml -g hg38
@@ -44,7 +53,7 @@ Generate IGV session XML files from cloud-hosted bigWig files with support for m
 - `-o, --output`: Output IGV session XML file (default: `igv_session.xml`)  
 - `-g, --genome`: Reference genome (`hg38` or `mm10`, default: `hg38`)  
 
-3. Example:
+4. Example:
 
     ```bash
     IGV_cloud_tracks -i mm10_tracks.txt -o mm10_session.xml -g mm10
